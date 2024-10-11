@@ -10,10 +10,31 @@ const productSchema = new mongoose.Schema({
         required: true
     },
     category: {
-        type:[
+        type: [
             {
-                type:String,
-                enum : ['engine-parts', 'body-parts', 'accessories']
+                type: String,
+                enum: [
+                    'engine-parts',
+                    'transmission-parts',
+                    'suspension-components',
+                    'braking-system',
+                    'electrical-components',
+                    'cooling-system',
+                    'exhaust-system',
+                    'fuel-system',
+                    'steering-and-suspension',
+                    'tires-and-wheels',
+                    'body-parts',
+                    'interior-accessories',
+                    'exterior-accessories',
+                    'performance-parts',
+                    'safety-equipment',
+                    'maintenance-and-repair',
+                    'lighting-and-indicators',
+                    'detailing-products',
+                    'vehicle-care',
+                    'miscellaneous'
+                ]
             }
         ]
     },
@@ -21,6 +42,9 @@ const productSchema = new mongoose.Schema({
         type: String
     },
     bestSeller:{
+        type: String
+    },
+    usage: {
         type: String
     },
     description:{
@@ -34,4 +58,4 @@ const productSchema = new mongoose.Schema({
 
 const Product = mongoose.model('Product', productSchema);
 
-module.exports = Product
+module.exports = Product;

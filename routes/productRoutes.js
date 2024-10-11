@@ -1,17 +1,21 @@
 const express = require('express');
+const cors = require('cors');
 const productController = require('../controllers/productController');
+const path = require('path');
 
 const router = express.Router();
 
+router.use(cors());
+
 router.post('/add-product/:firmId', productController.addProduct);
 router.get('/:firmId/products', productController.getProductByFirm);
-
-router.get('/uploads/:imageName', (req, res)=>{
+router.get('/all-products', productController.getAllProducts);
+router.get('/single-product/:id', productController.getProductById);
+router.get('/uploads/:imageName', (req, res) => {
     const imageName = req.params.imageName;
-    res.headerSent('Content-Type', 'image/jpeg');
-    res.sendfile(path.join(__dirname, '..', 'uploads', imageName));
+    res.headersSent('Content-Type', 'image/jpeg');
+    res.sendFile(path.join(__dirname, '..', 'uploads', imageName));
 });
-
-router.delete('/productId', productController.deleteProductById);
+router.delete('/:productId', productController.deleteProductById);
 
 module.exports = router;

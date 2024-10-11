@@ -1,4 +1,3 @@
-
 const mongoose = require('mongoose');
 
 const firmSchema = new mongoose.Schema({
@@ -7,30 +6,28 @@ const firmSchema = new mongoose.Schema({
         required: true,
         unique: true
     },
-    area:{
+    area: {
         type: String,
         required: true,
     },
-    category:{
-        type:[
-            {
-                type:String,
-                enum : ['engine-parts', 'body-parts', 'accessories']
-            }
-        ]
+    category: {
+        type: [{
+            type: String,
+            enum: ['engine-parts', 'body-parts', 'accessories']
+        }],
+        required: true,
     },
-    offer:{
-        type:String,
-
-    },
-    image:{
+    offer: {
         type: String,
     },
-    vendor:[{
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'vendor'
+    image: {
+        type: String,
+    },
+    vendor: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Vendor' 
     }],
-    products:[{
+    products: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Product'
     }]
@@ -38,4 +35,4 @@ const firmSchema = new mongoose.Schema({
 
 const Firm = mongoose.model('Firm', firmSchema);
 
-module.exports = Firm
+module.exports = Firm;
