@@ -1,7 +1,12 @@
+const express = require('express');
+const cors = require('cors');
 const Firm = require('../models/Firm');
 const Vendor = require('../models/Vendor');
 const multer = require('multer');
 const path = require('path');
+
+const router = express.Router();
+router.use(cors());
 
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
@@ -61,5 +66,8 @@ const deleteFirmById = async (req, res) => {
     }
 };
 
+// Routes
+router.post('/add', upload.single('image'), addFirm);
+router.delete('/:firmId', deleteFirmById);
 
-module.exports = { addFirm: [upload.single('image'), addFirm], deleteFirmById,};
+module.exports = router;
