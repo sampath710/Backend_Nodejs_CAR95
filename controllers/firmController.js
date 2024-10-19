@@ -1,18 +1,18 @@
 const Firm = require('../models/Firm');
 const Vendor = require('../models/Vendor');
 const multer = require('multer');
-const path = require('path'); // Ensure you have this imported
+const path = require('path');
 
 const storage = multer.diskStorage({
     destination: function(req, file, cb) {
-        cb(null, 'uploads/'); // Directory to store uploaded files
+        cb(null, 'uploads/');
     },
     filename: function(req, file, cb) {
-        cb(null, Date.now() + path.extname(file.originalname)); // Rename the file
+        cb(null, Date.now() + path.extname(file.originalname));
     }
 });
 
-// Initialize Multer with the storage configuration
+
 const upload = multer({ storage: storage });
 
 const addFirm = async (req, res) => {
