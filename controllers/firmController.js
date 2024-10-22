@@ -23,6 +23,7 @@ const addFirm = async (req, res) => {
         
         const vendor = await Vendor.findById(req.vendorId);
         if (!vendor) {
+            console.error("Vendor not found:", req.vendorId);
             return res.status(404).json({ message: "Vendor not found" });
         }
 
@@ -51,12 +52,12 @@ const addFirm = async (req, res) => {
 
 const deleteFirmById = async(req, res)=>{
     try {
-         const firmId = req.params.productId;
+         const firmId = req.params.firmId;
 
         const deletedFirm = await Firm.findByIdAndDelete(firmId);
 
         if(!deletedFirm){
-          return res.status(404).json({error: "No product found"})
+          return res.status(404).json({error: "No firm found"})
         }
     } catch (error) {
         console.error(error);
