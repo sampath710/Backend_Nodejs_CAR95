@@ -38,6 +38,7 @@ const addFirm = async (req, res) => {
         });
 
         const savedFirm = await firm.save();
+        console.log('Firm saved:', savedFirm);
         vendor.firm.push(savedFirm._id);
         await vendor.save();
 
