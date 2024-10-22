@@ -47,7 +47,7 @@ const addFirm = async (req, res) => {
 
         return res.status(200).json({ message: 'Firm added successfully', firm: savedFirm });
     } catch (error) {
-        console.error(error);
+        console.error('Error saving firm:', error);
         res.status(500).json({ error: "Internal server error" });
     }
 };
