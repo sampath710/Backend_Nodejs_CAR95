@@ -6,14 +6,13 @@ const bodyParser = require('body-parser');
 const firmRoutes = require('./routes/firmRoutes');
 const productRoutes = require('./routes/productRoutes');
 const cors = require('cors');
-const path = require('path')
 
 const app = express();
+app.use(cors())
 
 const PORT = process.env.PORT || 4000;
 
 dotEnv.config();
-app.use(cors())
 
 mongoose.connect(process.env.MONGO_URI)
     .then(()=>console.log("MongoDB connected sucessfully!"))
