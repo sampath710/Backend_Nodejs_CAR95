@@ -1,10 +1,11 @@
 
 const express = require('express');
+const path = require('path');
 const productController = require("../controllers/productController");
 
 const router = express.Router();
 
-router.post('/add-product/:firmId', productController.addProduct);
+router.post('/product/add-product/:firmId', productController.addProduct);
 router.get('/:firmId/products', productController.getProductByFirm);
 
 router.get('/uploads/:imageName', (req, res)=>{

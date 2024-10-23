@@ -21,10 +21,10 @@ const productSchema = new mongoose.Schema({
         type: String
     },
     bestseller:{
-        type:String
+        type: Boolean
     },
     description:{
-        type:String
+        type: String
     },
     firm: [{
         type: mongoose.Schema.Types.ObjectId,

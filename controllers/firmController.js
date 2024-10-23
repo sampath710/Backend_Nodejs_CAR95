@@ -18,7 +18,7 @@ const upload = multer({ storage: storage });
 const addFirm = async (req, res) => {
     console.log('Request body:', req.body);
     console.log('Uploaded file:', req.file);
-    
+
     try {
 
         const { firmName, area, category, region, offer } = req.body;
@@ -42,11 +42,15 @@ const addFirm = async (req, res) => {
         });
 
         const savedFirm = await firm.save();
-        console.log('Firm saved:', savedFirm);
-        vendor.firm.push(savedFirm._id);
+
+        const firmId = savedFirm._id
+
+
+        vendor.firm.push(savedFirm);
+
         await vendor.save();
 
-        return res.status(200).json({ message: 'Firm added successfully', firm: savedFirm });
+        return res.status(200).json({ message: 'Firm added successfully', firmId });
     } catch (error) {
         console.error('Error saving firm:', error);
         res.status(500).json({ error: "Internal server error" });
