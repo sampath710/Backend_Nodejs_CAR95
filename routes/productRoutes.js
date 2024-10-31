@@ -2,15 +2,17 @@
 const express = require('express');
 const path = require('path');
 const productController = require("../controllers/productController");
-
 const router = express.Router();
 
-router.post('/product/add-product/:firmId', productController.addProduct);
+router.use(express.json());
+
+
+router.post('/add-product/:firmId', productController.addProduct);
 router.get('/:firmId/products', productController.getProductByFirm);
 
 router.get('/uploads/:imageName', (req, res)=>{
     const imageName = req.params.imageName;
-    res.headersSent('Content-Type', 'image/jpeg');
+    res.set('Content-Type', 'image/jpeg');
     res.sendFile(path.join(__dirname, '..', 'uploads', imageName));
 });
 

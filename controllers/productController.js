@@ -16,6 +16,10 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage });
 
 const addProduct = async(req, res) => {
+    console.log("Request Body:", req.body);
+    console.log("Firm ID:", req.params.firmId);
+    console.log("Uploaded File:", req.file);
+
     try {
         const { productName, price, category, bestseller, description } = req.body;
         const image = req.file ? req.file.filename : undefined;
@@ -39,11 +43,12 @@ const addProduct = async(req, res) => {
         })
 
         const savedProduct = await product.save();
-        firm.products.push(savedProduct);
+
+        firm.products.push(savedProduct._id);
 
         await firm.save();
 
-        res.status(200).json(savedProduct);
+        return res.status(201).json({ message: 'Product added successfully', productId: savedProduct._id });
 
     } catch (error) {
         console.error(error);
@@ -64,7 +69,7 @@ const getProductByFirm = async(req, res)=>{
 
             const products = await Product.find({firm: firmId});
 
-            res.status(200).json({CarDecorName, products});
+            res.status(200).json({ CarDecorName, products });
     } catch (error) {
         console.error(error);
         res.status(500).json({error: "internal server error"})
@@ -80,6 +85,7 @@ const deleteProductById = async(req, res)=>{
         if(!deletedProduct){
           return res.status(404).json({error: "No product found"})
         }
+        return res.status(200).json({ message: "Product deleted successfully" });
     } catch (error) {
         console.error(error);
         res.status(500).json({error: "internal server error"})
